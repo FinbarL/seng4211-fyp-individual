@@ -1,0 +1,36 @@
+---
+import {
+    Bars3Icon,
+    HeartIcon,
+    MagnifyingGlassIcon,
+    MapPinIcon,
+    ShoppingBagIcon,
+    UserIcon
+} from "@heroicons/vue/24/outline";
+import Drawer from "./Drawer.astro";
+---
+<div class="navbar bg-base-100">
+    <div class="flex-none">
+        <Drawer></Drawer>
+    </div>
+    <div class="flex-1">
+        <a class="btn btn-ghost normal-case text-xl">Example Store</a>
+    </div>
+    <div class="flex-none">
+        <button class="btn btn-square btn-ghost">
+            <UserIcon></UserIcon>
+        </button>
+        <button class="btn btn-square btn-ghost">
+            <MagnifyingGlassIcon></MagnifyingGlassIcon>
+        </button>
+        <button class="btn btn-square btn-ghost">
+            <MapPinIcon></MapPinIcon>
+        </button>
+        <button class="btn btn-square btn-ghost">
+            <HeartIcon></HeartIcon>
+        </button>
+        <button class="btn btn-square btn-ghost">
+            <ShoppingBagIcon></ShoppingBagIcon>
+        </button>
+    </div>
+</div>

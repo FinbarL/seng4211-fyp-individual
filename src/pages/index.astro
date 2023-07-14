@@ -1,20 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Bars3Icon, UserIcon, MagnifyingGlassIcon, MapPinIcon, HeartIcon, ShoppingBagIcon } from "@heroicons/vue/24/outline";
-import Navbar from "../components/Navbar.astro";
-import Carousel from "../components/Carousel.vue";
+import {ProductData} from "../types/types";
+import {Product} from "../types/types";
+import ShopItem from "../components/ShopItem.astro";
+const ApiResp = await fetch('https://dummyjson.com/products');
+const productsData: ProductData = await ApiResp.json();
+const products: Product[] = productsData.products;
 ---
 
 <Layout title="Welcome to Astro.">
-	<Navbar></Navbar>
+    <main>
+        <h1>Welcome to <span class="text-gradient">the Store!</span></h1>
+        <div class="w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {products.map(product => (
+                <ShopItem product={product} ></ShopItem>
+            ))}
+            </div>
+        </div>
 
-	<main>
-		<h1>Welcome to <span class="text-gradient">the Store!</span></h1>
-		<div class="w-full">
-			<Carousel client:only="vue" />
-		</div>
+        <!-- force footer to bottom -->
 
-	</main>
+
+
+    </main>
 </Layout>
 
 <style>

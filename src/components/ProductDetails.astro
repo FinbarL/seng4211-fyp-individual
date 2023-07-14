@@ -1,0 +1,48 @@
+---
+import { Product } from '../types/types';
+import StarIcon from './icons/StarIcon.astro';
+import getDiscountPrice from '../helpers/getDiscountPrice';
+interface Props {
+  product: Product;
+}
+const { product } = Astro.props;
+---
+
+<div class='mt-8 grid grid-cols-2 gap-12'>
+  <div class='grid grid-cols-1 md:grid-cols-2 gap-2'>
+    {product.images.map((image, index) => (
+      <div class='aspect-w-1 aspect-h-1'>
+        <img
+          src={image}
+          alt={`${product.title} image-${index}`}
+          class='object-cover w-full h-full hover:opacity-75 transition ease-in-out duration-150'
+          id={`${product.title} image-${index}`}
+        />
+      </div>
+    ))}</div>
+  <div>
+    <h1 class='text-3xl font-extrabold tracking-tight  sm:text-4xl'>
+      {product.title}
+    </h1>
+    <div class='mt-4'>
+      <p class='text-xs text-gray-600'>Product Id: {product.id}</p>
+
+      <div class='flex items-center text-sm mt-1'>
+        <StarIcon />
+        <span class='ml-1'>{product.rating}</span>
+      </div>
+      <div class='flex items-center'>
+        <span class='text-[32px] text-red-500'>-{product.discountPercentage}%</span>
+        <div class='flex text-[32px] font-semibold ml-2'>
+          <span
+            class='relative top-1.5 text-[65%]'>$</span>{getDiscountPrice(product.price, product.discountPercentage)}
+        </div>
+      </div>
+      <div>Was: <span class='line-through'>${product.price}</span></div>
+      <div>
+        <p class='mt-4 text-gray-600'>{product.description}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+---
+import { Product } from '../types/types';
+import StarIcon from './icons/StarIcon.astro';
+interface Props {
+  product: Product;
+}
+const { product } = Astro.props;
+---
+
+<div class='mt-8'>
+  <a href={`/products/${product.id}`}>
+    <img
+      src={product.thumbnail}
+      alt={`${product.title} Thumbnail`}
+      class='object-cover w-[250px] h-[250px] hover:opacity-75 transition ease-in-out duration-150'
+      id={`product-${product.id}`}
+    />
+  </a>
+  <div class='mt-2'>
+    <div class='w-12'></div>
+    <a href={`/products/${product.id}`} class='text-lg mt-2 hover:text-gray-300'
+    >{product.title}</a>
+    <div class='flex items-center text-gray-400 text-sm mt-1'>
+      <StarIcon />
+      <span class='ml-1'>{product.rating}</span>
+      <span class='mx-2'>|</span>
+      <span>${product.price}</span>
+    </div>
+    <div class='text-gray-400 text-sm'>{product.category}</div>
+  </div>
+</div>

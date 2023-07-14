@@ -1,31 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import {ProductData} from "../types/types";
-import {Product} from "../types/types";
-import ShopItem from "../components/ShopItem.astro";
+import { ProductData } from '../types/types';
+import { Product } from '../types/types';
+import ShopItem from '../components/ShopCard.astro';
 const ApiResp = await fetch('https://dummyjson.com/products');
 const productsData: ProductData = await ApiResp.json();
 const products: Product[] = productsData.products;
 ---
 
-<Layout title="Welcome to Astro.">
-    <main>
-        <h1>Welcome to <span class="text-gradient">the Store!</span></h1>
-        <div class="w-full">
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            {products.map(product => (
-                <ShopItem product={product} ></ShopItem>
-            ))}
-            </div>
-        </div>
-
-        <!-- force footer to bottom -->
+<Layout title='Welcome to Astro.'>
+  <main>
+    <h1 class='text-2xl ml-8'>
+      Welcome to <span class='text-gradient'>the Store!</span>
+    </h1>
+    <iframe width='560' height='315' src='https://www.youtube.com/embed/kJQP7kiw5Fk?controls=0&autoplay=1&mute=1&loop=1'
+            allow='accelerometer; autoplay; modestbranding; encrypted-media; gyroscope; picture-in-picture'
+            allowfullscreen></iframe>
 
 
+    <div class='w-full'>
+      <div
+        class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8'
+      >
+        {products.map(product => (
+          <ShopItem product={product}></ShopItem>
+        ))}
+      </div>
+    </div>
 
-    </main>
+    <!-- force footer to bottom -->
+  </main>
 </Layout>
 
-<style>
-
-</style>
+<style></style>

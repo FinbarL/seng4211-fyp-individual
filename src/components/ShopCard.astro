@@ -8,14 +8,24 @@ const { product } = Astro.props;
 ---
 
 <div class='mt-8'>
-  <a href={`/products/${product.id}`}>
-    <img
-      src={product.thumbnail}
-      alt={`${product.title} Thumbnail`}
-      class='object-cover w-[250px] h-[250px] hover:opacity-75 transition ease-in-out duration-150'
-      id={`product-${product.id}`}
-    />
-  </a>
+  <div class='relative'>
+    <a href={`/products/${product.id}`}>
+      <img
+        src={product.thumbnail}
+        alt={`${product.title} Thumbnail`}
+        loading='lazy'
+        class='object-cover w-[250px] h-[250px] hover:opacity-75 transition ease-in-out duration-150 hover:scale-110'
+        id={`product-${product.id}`}
+      />
+      <img
+        src={product.images[0]}
+        alt={`${product.title} Thumbnail`}
+        loading='lazy'
+        class='object-cover w-[250px] h-[250px] absolute top-0 left-0 opacity-0 transition-opacity duration-300 transform hover:opacity-100'
+        id={`product-hover-${product.id}`}
+      />
+    </a>
+  </div>
   <div class='mt-2'>
     <div class='w-12'></div>
     <a href={`/products/${product.id}`} class='text-lg mt-2 hover:text-gray-300'
@@ -25,7 +35,8 @@ const { product } = Astro.props;
       <span class='ml-1'>{product.rating}</span>
       <span class='mx-2'>|</span>
       <span>${product.price}</span>
+      <span class='mx-2'>|</span>
+      <span class='badge'>{product.category}</span>
     </div>
-    <div class='text-gray-400 text-sm'>{product.category}</div>
   </div>
 </div>

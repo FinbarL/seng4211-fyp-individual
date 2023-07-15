@@ -24,7 +24,7 @@ const products: Product[] = productsData.products;
           allow='autoplay; fullscreen; picture-in-picture' allowfullscreen
         ></iframe>
       </div>
-      <script async src='https://player.vimeo.com/api/player.js'></script>
+      <script async rel='prerender' src='https://player.vimeo.com/api/player.js'></script>
     </div>
 
     <div class='w-full m-8'>
@@ -37,8 +37,6 @@ const products: Product[] = productsData.products;
         ))}
       </div>
     </div>
-
-    <!-- force footer to bottom -->
   </main>
 </Layout>
 

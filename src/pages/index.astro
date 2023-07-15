@@ -10,15 +10,25 @@ const products: Product[] = productsData.products;
 
 <Layout title='Welcome to Astro.'>
   <main>
-    <h1 class='text-2xl ml-8'>
-      Welcome to <span class='text-gradient'>the Store!</span>
-    </h1>
-    <iframe width='560' height='315' src='https://www.youtube.com/embed/kJQP7kiw5Fk?controls=0&autoplay=1&mute=1&loop=1'
-            allow='accelerometer; autoplay; modestbranding; encrypted-media; gyroscope; picture-in-picture'
-            allowfullscreen></iframe>
+    <div class='flex flex-col w-full'>
+      <div class='grid h-20  bg-base-300 place-items-center text-3xl font-semibold'> Welcome to <span
+        class='text-gradient'>the Store!</span>
+      </div>
+    </div>
 
+    <div class='max-h-[1080px]'>
+      <div style='padding:42% 0 0 0;position:relative;'>
+        <iframe
+          src='https://player.vimeo.com/video/225678399?h=c79a9be5c7&autoplay=1&loop=1&title=0&byline=0&portrait=0&muted=1&background=1&controls=0'
+          style='position:absolute;top:0;left:0;width:100%;height:100%;max-height:1080px;' frameborder='0'
+          allow='autoplay; fullscreen; picture-in-picture' allowfullscreen
+        ></iframe>
+      </div>
+      <script async src='https://player.vimeo.com/api/player.js'></script>
+    </div>
 
-    <div class='w-full'>
+    <div class='w-full m-8'>
+      <h1 class='text-2xl leading-8 text-center font-semibold'>Deals of the Month </h1>
       <div
         class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8'
       >
@@ -32,4 +42,12 @@ const products: Product[] = productsData.products;
   </main>
 </Layout>
 
-<style></style>
+<style>
+    html {
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        margin: 0;
+    }
+</style>

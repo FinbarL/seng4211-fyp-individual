@@ -9,7 +9,10 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-const currentPage = ref(1);
+const props = defineProps({
+  currentPage: { type: Number, required: true },
+});
+const currentPage = ref(props.currentPage);
 const emit = defineEmits(['page-change']);
 // Emit page change event
 watch(currentPage, () => {

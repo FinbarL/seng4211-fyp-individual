@@ -1,0 +1,21 @@
+---
+interface Props {
+  pageNumber: string;
+}
+const { pageNumber } = Astro.props;
+const nextPage: string = `/homepage/${1 + parseInt(pageNumber)}`;
+const prevPage: string = `/homepage/${pageNumber - 1}`;
+---
+
+<div>
+
+  <div class='flex join w-full justify-center mt-4'>
+    <a href={`${prevPage}`}>
+      <button class='join-item btn'>«</button>
+    </a>
+    <button class='join-item btn'>{pageNumber}</button>
+    <a href={`${nextPage}`}>
+      <button class='join-item btn'>»</button>
+    </a>
+  </div>
+</div>

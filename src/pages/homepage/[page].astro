@@ -5,9 +5,18 @@ import DealOfTheMonth from '../../components/DealOfTheMonth.astro';
 const { page } = Astro.params;
 const limit = 20;
 const skip = (page - 1) * limit;
-
 const ApiResp = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`);
 const productsData: ProductData = await ApiResp.json();
+export function getStaticPaths() {
+  return [
+    { params: { page: '1' } },
+    { params: { page: '2' } },
+    { params: { page: '3' } },
+    { params: { page: '4' } },
+    { params: { page: '5' } },
+    { params: { page: '6' } },
+  ];
+}
 const products: Product[] = productsData.products;
 ---
 

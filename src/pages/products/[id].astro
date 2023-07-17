@@ -3,6 +3,15 @@ import Layout from '../../layouts/Layout.astro';
 import { Product } from '../../types/types';
 import ProductDetails from '../../components/ProductDetails.astro';
 const { id } = Astro.params;
+export function getStaticPaths() {
+  const paths = [];
+  for (let i = 1; i <= 100; i++) {
+    paths.push({ params: { id: String(i) } });
+  }
+  return [
+    paths,
+  ];
+}
 const productData: Product = await fetch(`https://dummyjson.com/products/${id}`).then((res) => res.json());
 console.log(productData);
 ---

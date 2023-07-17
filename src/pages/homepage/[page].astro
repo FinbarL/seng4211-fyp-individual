@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Product, ProductData } from '../../types/types';
+import DealOfTheMonth from '../../components/DealOfTheMonth.astro';
+const { page } = Astro.params;
+const limit = 20;
+const skip = (page - 1) * limit;
+
+const ApiResp = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`);
+const productsData: ProductData = await ApiResp.json();
+const products: Product[] = productsData.products;
+---
+
+<Layout title='Product Page'>
+  <DealOfTheMonth products={products} pageNumber={page} />
+</Layout>

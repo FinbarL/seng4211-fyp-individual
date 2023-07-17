@@ -48,6 +48,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
+      - name: Debug
+        run: ls -la
+        
       - name: Unzip application
         run: unzip -o node-app/app.zip -d node-app
         

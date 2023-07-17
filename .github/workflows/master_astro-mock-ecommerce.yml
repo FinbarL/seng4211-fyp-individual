@@ -52,7 +52,7 @@ jobs:
         run: ls -la
         
       - name: Unzip application
-        run: unzip -o node-app/app.zip -d node-app
+        run: unzip -o app.zip -d node-app
         
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp

@@ -10,4 +10,7 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
+  buildOptions: {
+    site: 'https://astro-mock-ecommerce.azurewebsites.net/',
+  },
 });

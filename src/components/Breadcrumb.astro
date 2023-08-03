@@ -1,0 +1,22 @@
+---
+const url = Astro.url.pathname;
+
+const paths = generateBreadcrumb(url);
+const pathNames = url.split('/').filter((path) => path)
+function generateBreadcrumb(url: string) {
+    const parts = url.split('/');
+    return parts.map((part, index) => {
+        return parts.slice(0, index + 1).join('/');
+    }).filter((path) => path != '');
+}
+
+console.log(paths);
+console.log(pathNames);
+---
+<div class="text-sm breadcrumbs">
+    <ul>
+        {paths.map((path, index) => (
+            <li><a href=`${path}`>{pathNames[index]}</a></li>
+        ))}
+    </ul>
+</div>

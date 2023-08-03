@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import {isLoggedIn} from "../utils/isLoggedIn";
-const cookies = Astro.request.headers.get('cookie');
-if(isLoggedIn(cookies)) {
-    return Astro.redirect('/logout');
+import {getUserData} from "../utils/getUserData";
+const userCookie = Astro.cookies.get('userData').value;
+const userData = getUserData(userCookie);
+if(userData) {
+    return Astro.redirect('/user');
 }
 const LoginUser = async (username: string, password: string) => {
     const login = await fetch('https://dummyjson.com/auth/login', {
@@ -14,13 +15,11 @@ const LoginUser = async (username: string, password: string) => {
             password,
         })
     })
-    if(login.ok) {
-        console.log("WE GUCCI!")
-        return true;
-    } else {
-        console.log("NOT ALLOWED!")
-        return false;
+    if(login.body){
+        const body = await login.json();
+        Astro.cookies.set('userData', JSON.stringify(body));
     }
+    return login.ok;
 };
 
 
@@ -31,8 +30,6 @@ if (Astro.request.method === "POST") {
         const password: string = data.get("password").toString();
         const auth = await LoginUser(username , password);
         if(auth) {
-            Astro.cookies.set('username', username);
-            Astro.cookies.set('isLoggedIn', "true");
             return Astro.redirect('/');
         } else {
             return Astro.redirect('/login');

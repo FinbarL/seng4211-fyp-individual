@@ -3,8 +3,11 @@ interface Props {
   pageNumber: string;
 }
 const { pageNumber } = Astro.props;
-const nextPage: string = `/homepage/${1 + parseInt(pageNumber)}`;
-const prevPage: string = `/homepage/${pageNumber - 1}`;
+const url: string = Astro.url.pathname;
+const route = url.substring(0, url.lastIndexOf('/')+1);
+const nextPage: string = `${route}${1 + parseInt(pageNumber)}`;
+const prevPage: string = `${route}${pageNumber - 1}`;
+console.log(nextPage);
 ---
 
 <div>

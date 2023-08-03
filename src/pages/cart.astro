@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {getUserData} from "../utils/getUserData";
+import {CartResponse} from "../types/Cart";
+import CartDisplay from "../components/CartDisplay.astro";
+const userCookie = Astro.cookies.get('userData').value;
+const userData = getUserData(userCookie);
+let CartData: CartResponse;
+if(userData) {
+    const ApiResp = await fetch(`https://dummyjson.com/carts/user/${userData.id}`);
+    CartData = await ApiResp.json();
+}
+
+---
+
+<Layout title='Welcome to Astro.'>
+    <div class="px-12">
+        <h1 class="font-bold text-4xl p-4">Cart Data</h1>
+                        {CartData.carts.map(cart => (
+                                <CartDisplay cart={cart}></CartDisplay>
+                        ))}
+    </div>
+</Layout>
+<style>
+    html {
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        margin: 0;
+    }
+</style>

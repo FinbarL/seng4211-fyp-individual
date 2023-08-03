@@ -4,12 +4,28 @@ import StarIcon from './icons/StarIcon.astro';
 import getDiscountPrice from '../helpers/getDiscountPrice';
 interface Props {
   product: Product;
+  auth: boolean;
 }
-const { product } = Astro.props;
+const { product, auth } = Astro.props;
+if (Astro.request.method === "POST") {
+  try {
+
+    if(auth) {
+      return Astro.redirect('/checkout');
+    } else {
+      return Astro.redirect('/login');
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
 ---
 
 <div class='mt-8 grid grid-cols-2 gap-12'>
   <div class='grid grid-cols-1 md:grid-cols-2 gap-2'>
+
     {product.images.map((image, index) => (
       <div class='aspect-square'>
         <img
@@ -42,7 +58,13 @@ const { product } = Astro.props;
       <div>
         <p class='mt-4 text-gray-600'>{product.description}</p>
       </div>
-    </div>
+      <div>{auth ? 'test' : 'nope'}</div>
+      {auth &&
+          <form class="space-y-4" method="POST">
+          <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg">Login</button>
+          </form>
+      }
 
+    </div>
   </div>
 </div>

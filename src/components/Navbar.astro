@@ -8,16 +8,18 @@ import {
   UserIcon,
 } from '@heroicons/vue/24/outline';
 import Drawer from './Drawer.astro';
-import { isLoggedIn } from "../utils/isLoggedIn";
-const cookie = Astro.request.headers.get('cookie');
-const username = isLoggedIn(cookie);
-if(!username) {
-  /*  Astro.response.headers.set('location', '/login');
-    Astro.response.status = 302;*/
-
+import { getUserData } from "../utils/getUserData";
+import {CartResponse} from "../types/Cart";
+import Breadcrumb from "./Breadcrumb.astro";
+const userCookie = Astro.cookies.get('userData').value;
+const userData = getUserData(userCookie);
+let cartCount: number;
+if(userData) {
+  const ApiResp = await fetch(`https://dummyjson.com/carts/user/${userData.id}`);
+  const cartData: CartResponse = await ApiResp.json();
+  cartCount = cartData.carts[0].products.length;
 }
 ---
-
 <div class='navbar bg-base-100 sticky left-0 top-0 w-full fixed z-10'>
   <div class='flex-none'>
     <Drawer></Drawer>
@@ -25,8 +27,8 @@ if(!username) {
   <div class='flex-1'>
     <a class='btn btn-ghost normal-case text-xl' href={`/`}>Example Store</a>
   </div>
-  <div class='flex-none'>
-    <div> {username ? 'Welcome ' + username : '' }</div>
+  <div class='flex-none mr-6'>
+    <div> {userData ? 'Welcome, ' + userData.firstName : '' }</div>
     <a id="userbtn" aria-label="User" class='btn btn-square btn-ghost' href="/login">
       <UserIcon></UserIcon>
     </a>
@@ -39,8 +41,14 @@ if(!username) {
     <button id="hearticonbtn" aria-label="Heart" class='btn btn-square btn-ghost'>
       <HeartIcon></HeartIcon>
     </button>
-    <button id="shoppingbtn" aria-label="Shopping" class='btn btn-square btn-ghost'>
-      <ShoppingBagIcon></ShoppingBagIcon>
-    </button>
+    <div class="indicator">
+      <span class="indicator-item badge indicator-top indicator-right badge-sm badge-accent mr-2 mt-3">{cartCount}</span>
+      <a id="shoppingbtn" aria-label="Shopping" class='btn btn-square btn-ghost' href="/cart">
+        <ShoppingBagIcon></ShoppingBagIcon>
+      </a>
+    </div>
   </div>
+</div>
+<div class="ml-3">
+  <Breadcrumb></Breadcrumb>
 </div>

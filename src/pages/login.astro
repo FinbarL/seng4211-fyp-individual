@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {isLoggedIn} from "../utils/isLoggedIn";
+const cookies = Astro.request.headers.get('cookie');
+if(isLoggedIn(cookies)) {
+    return Astro.redirect('/logout');
+}
+const LoginUser = async (username: string, password: string) => {
+    const login = await fetch('https://dummyjson.com/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            username,
+            password,
+        })
+    })
+    if(login.ok) {
+        console.log("WE GUCCI!")
+        return true;
+    } else {
+        console.log("NOT ALLOWED!")
+        return false;
+    }
+};
+
+
+if (Astro.request.method === "POST") {
+    try {
+        const data = await Astro.request.formData();
+        const username: string = data.get("username").toString();
+        const password: string = data.get("password").toString();
+        const auth = await LoginUser(username , password);
+        if(auth) {
+            Astro.cookies.set('username', username);
+            Astro.cookies.set('isLoggedIn', "true");
+            return Astro.redirect('/');
+        } else {
+            return Astro.redirect('/login');
+        }
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+}
+
+---
+
+<Layout title='Welcome to Astro.'>
+    <div class="flex flex-col items-center justify-center py-2">
+        <div class="flex items-center justify-center min-w-[400px] w-[25%]">
+
+            <div class="p-10 bg-white rounded-lg w-full">
+                <h2 class="text-2xl font-bold mb-6">Login</h2>
+
+                <!-- Login Form -->
+                <form class="space-y-4" method="POST">
+                    <div>
+                        <label for="username" class="block mb-1">Username:</label>
+                        <input type="text" id="username" name="username" class="w-full px-4 py-2 rounded-lg border" required>
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-1">Password:</label>
+                        <input type="password" id="password" name="password" class="w-full px-4 py-2 rounded-lg border" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg">Login</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</Layout>
+<style>
+    html {
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        margin: 0;
+    }
+</style>

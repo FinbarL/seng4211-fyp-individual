@@ -6,6 +6,9 @@ const userData = getUserData(userCookie);
 if(userData) {
     return Astro.redirect('/user');
 }
+const randomNumber = Math.floor(Math.random() * 100) + 1;
+const randomUser = await fetch(`https://dummyjson.com/users/${randomNumber}`);
+const user = await randomUser.json();
 const LoginUser = async (username: string, password: string) => {
     const login = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',
@@ -62,6 +65,14 @@ if (Astro.request.method === "POST") {
                     </div>
                     <div>
                         <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg">Login</button>
+                    </div>
+                    <div>Random User Credentials:
+                        <ul class="font-bold">
+                            Username: {user.username}
+                        </ul>
+                        <ul class="font-bold">
+                            Password: {user.password}
+                        </ul>
                     </div>
                 </form>
             </div>

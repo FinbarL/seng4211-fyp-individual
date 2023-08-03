@@ -8,14 +8,6 @@ import {
   UserIcon,
 } from '@heroicons/vue/24/outline';
 import Drawer from './Drawer.astro';
-import { isLoggedIn } from "../utils/isLoggedIn";
-const cookie = Astro.request.headers.get('cookie');
-const username = isLoggedIn(cookie);
-if(!username) {
-/*  Astro.response.headers.set('location', '/login');
-  Astro.response.status = 302;*/
-
-}
 ---
 
 <div class='navbar bg-base-100 sticky left-0 top-0 w-full fixed z-10'>
@@ -26,10 +18,9 @@ if(!username) {
     <a class='btn btn-ghost normal-case text-xl' href={`/`}>Example Store</a>
   </div>
   <div class='flex-none'>
-    <div> {username ? 'Welcome ' + username : '' }</div>
-    <a id="userbtn" aria-label="User" class='btn btn-square btn-ghost' href="/login">
+    <button id="userbtn" aria-label="User" class='btn btn-square btn-ghost'>
       <UserIcon></UserIcon>
-    </a>
+    </button>
     <button id="magniftybtn" aria-label="Magnify" class='btn btn-square btn-ghost'>
       <MagnifyingGlassIcon></MagnifyingGlassIcon>
     </button>

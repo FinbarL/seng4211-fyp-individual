@@ -17,7 +17,7 @@ let cartCount: number;
 if(userData) {
   const ApiResp = await fetch(`https://dummyjson.com/carts/user/${userData.id}`);
   const cartData: CartResponse = await ApiResp.json();
-  cartCount = cartData.carts[0].products.length;
+  cartCount = cartData?.carts[0]?.products?.length ?? 0;
 }
 ---
 <div class='navbar bg-base-100 sticky left-0 top-0 w-full fixed z-10'>

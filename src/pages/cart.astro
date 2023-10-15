@@ -7,7 +7,7 @@ const userCookie = Astro.cookies.get('userData').value;
 const userData = getUserData(userCookie);
 let CartData: CartResponse;
 if(userData) {
-    const ApiResp = await fetch(`https://dummyjson.com/carts/user/${userData.id}`);
+    const ApiResp = await fetch(`https://ecommerce-dummy-json.vercel.app/carts/user/${userData.id}`);
     CartData = await ApiResp.json();
 }
 

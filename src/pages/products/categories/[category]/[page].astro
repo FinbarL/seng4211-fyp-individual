@@ -5,7 +5,7 @@ import Layout from "../../../../layouts/Layout.astro";
 const {category, page} = Astro.params;
 const limit = 20;
 const skip = (page - 1) * limit;
-const ApiResp = await fetch(`https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`);
+const ApiResp = await fetch(`https://ecommerce-dummy-json.vercel.app/products/category/${category}?limit=${limit}&skip=${skip}`);
 const productsData: ProductData = await ApiResp.json();
 const products: Product[] = productsData.products;
 ---

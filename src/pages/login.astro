@@ -7,10 +7,10 @@ if(userData) {
     return Astro.redirect('/user');
 }
 const randomNumber = Math.floor(Math.random() * 100) + 1;
-const randomUser = await fetch(`https://dummyjson.com/users/${randomNumber}`);
+const randomUser = await fetch(`https://ecommerce-dummy-json.vercel.app/users/${randomNumber}`);
 const user = await randomUser.json();
 const LoginUser = async (username: string, password: string) => {
-    const login = await fetch('https://dummyjson.com/auth/login', {
+    const login = await fetch('https://ecommerce-dummy-json.vercel.app/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

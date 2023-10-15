@@ -1,7 +1,7 @@
 ---
 import {Bars3Icon} from "@heroicons/vue/24/outline";
 
-const ApiResp = await fetch(`https://dummyjson.com/products/categories`);
+const ApiResp = await fetch(`https://ecommerce-dummy-json.vercel.app/products/categories`);
 const categories: string[] = await ApiResp.json();
 ---
 

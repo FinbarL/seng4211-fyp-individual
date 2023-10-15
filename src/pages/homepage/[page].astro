@@ -5,7 +5,7 @@ import DealOfTheMonth from '../../components/DealOfTheMonth.astro';
 const { page } = Astro.params;
 const limit = 20;
 const skip = (page - 1) * limit;
-const ApiResp = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`);
+const ApiResp = await fetch(`https://ecommerce-dummy-json.vercel.app/products?limit=${limit}&skip=${skip}`);
 const productsData: ProductData = await ApiResp.json();
 
 const products: Product[] = productsData.products;

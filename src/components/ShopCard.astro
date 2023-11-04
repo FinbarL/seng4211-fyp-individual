@@ -14,7 +14,6 @@ const { product } = Astro.props;
       <Image
         src={product.thumbnail}
         alt={`${product.title} Thumbnail`}
-        loading='lazy'
         class='object-cover w-[250px] h-[250px] hover:opacity-75 transition ease-in-out duration-150 hover:scale-110'
         id={`product-${product.id}`}
         width='250'
@@ -23,7 +22,6 @@ const { product } = Astro.props;
       <Image
         src={product.images[0]}
         alt={`${product.title} Thumbnail`}
-        loading='lazy'
         class='object-cover w-[250px] h-[250px] absolute top-0 left-0 opacity-0 transition-opacity duration-300 transform hover:opacity-100'
         id={`product-hover-${product.id}`}
         width='250'

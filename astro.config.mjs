@@ -21,8 +21,5 @@ export default defineConfig({
       enabled: true,
     },
     imageService: true,
-    imagesConfig: {
-      sizes: [250, 500],
-    },
   }),
 });

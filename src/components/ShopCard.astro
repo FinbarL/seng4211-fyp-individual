@@ -1,6 +1,7 @@
 ---
 import { Product } from '../types/types';
 import StarIcon from './icons/StarIcon.astro';
+import { Image } from "astro:assets";
 interface Props {
   product: Product;
 }
@@ -10,19 +11,23 @@ const { product } = Astro.props;
 <div class='mt-8'>
   <div class='relative'>
     <a href={`/products/${product.id}`}>
-      <img
+      <Image
         src={product.thumbnail}
         alt={`${product.title} Thumbnail`}
         loading='lazy'
         class='object-cover w-[250px] h-[250px] hover:opacity-75 transition ease-in-out duration-150 hover:scale-110'
         id={`product-${product.id}`}
+        width='250'
+        height='250'
       />
-      <img
+      <Image
         src={product.images[0]}
         alt={`${product.title} Thumbnail`}
         loading='lazy'
         class='object-cover w-[250px] h-[250px] absolute top-0 left-0 opacity-0 transition-opacity duration-300 transform hover:opacity-100'
         id={`product-hover-${product.id}`}
+        width='250'
+        height='250'
       />
     </a>
   </div>

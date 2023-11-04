@@ -2,6 +2,7 @@
 import { Product } from '../types/types';
 import StarIcon from './icons/StarIcon.astro';
 import getDiscountPrice from '../helpers/getDiscountPrice';
+import Image from 'astro:assets';
 interface Props {
   product: Product;
   auth: boolean;
@@ -33,6 +34,8 @@ if (Astro.request.method === "POST") {
           alt={`${product.title} image-${index}`}
           class='object-cover w-full h-full hover:opacity-75 transition ease-in-out duration-150'
           id={`${product.title} image-${index}`}
+          width='500'
+          height='500'
         />
       </div>
     ))}</div>

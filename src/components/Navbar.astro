@@ -11,7 +11,7 @@ import Drawer from './Drawer.astro';
 import { getUserData } from "../utils/getUserData";
 import {CartResponse} from "../types/Cart";
 import Breadcrumb from "./Breadcrumb.astro";
-const userCookie = Astro.cookies.get('userData').value;
+const userCookie = Astro.cookies.get('userData')?.value;
 const userData = getUserData(userCookie);
 let cartCount: number;
 if(userData) {

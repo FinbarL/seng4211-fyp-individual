@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import {getUserData} from "../utils/getUserData";
-const userCookie = Astro.cookies.get('userData').value;
+const userCookie = Astro.cookies.get('userData')?.value;
 const userData = getUserData(userCookie);
 if(userData) {
     return Astro.redirect('/user');

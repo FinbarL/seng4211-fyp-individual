@@ -1,7 +1,7 @@
 ---
 import { getUserData } from "../utils/getUserData";
 import Layout from "../layouts/Layout.astro";
-const userCookie = Astro.cookies.get('userData').value;
+const userCookie = Astro.cookies.get('userData')?.value;
 const userData = getUserData(userCookie);
 import { Image } from 'astro:assets';
 
@@ -14,6 +14,7 @@ if(!userData) {
         <figure><Image src={userData.image} alt="userImage" width='500' height='500'/></figure>
         <div class="card-body">
             <h2 class="card-title">{userData.firstName} {userData.lastName}</h2>
+            <p class="text-gray-600 mb-4">ID: {userData.id}</p>
             <p class="text-gray-600 mb-4">Username: {userData.username}</p>
             <p class="text-gray-600 mb-4">Email: {userData.email}</p>
             <p class="text-gray-600 mb-4">Gender: {userData.gender}</p>

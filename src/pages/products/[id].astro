@@ -9,7 +9,7 @@ if(!Number.isInteger(parseInt(id))) {
   return Astro.redirect(`/products/1`);
 }
 const productData: Product = await fetch(`https://ecommerce-dummy-json.vercel.app/products/${id}`).then((res) => res.json());
-const cookie = Astro.cookies.get('userData').value;
+const cookie = Astro.cookies.get('userData')?.value;
 const userData = getUserData(cookie);
 
 const auth = userData !== null;

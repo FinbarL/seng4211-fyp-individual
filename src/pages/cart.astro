@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import {getUserData} from "../utils/getUserData";
 import {CartResponse} from "../types/Cart";
 import CartDisplay from "../components/CartDisplay.astro";
-const userCookie = Astro.cookies.get('userData').value;
+const userCookie = Astro.cookies.get('userData')?.value;
 const userData = getUserData(userCookie);
 let CartData: CartResponse;
 if(userData) {
